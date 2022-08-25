@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run:
           name: Show current branch
-          command: echo ${CURRENT_BRANCH}
+          command: echo ${CIRCLE_BRANCH}
       - restore_cache:
           keys:
             - app-{{ checksum "package.json" }}
@@ -21,3 +21,27 @@ jobs:
           key: app-{{ checksum "package.json" }}
           paths:
             - node_modules
+  deploy_to_aws-s3:
+    docker:
+      - image: cimg/node:current
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Show current branch
+          command: echo ${CIRCLE_BRANCH}
+      - run:
+          name: Install AWS CLI
+          working_directory: /
+          command: |
+            sudo apt-get -y -qq update
+            sudo apt-get install -y awscli
+            sudo apt-get install -y python-pip python-dev build-essential
+      - run:
+          name: Build Project
+          command: |
+            yarn install
+            yarn run build
+            cd build
+            zip ../build.zip -r * .[^.]*
+            echo "Build successfull"
