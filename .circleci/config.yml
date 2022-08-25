@@ -99,7 +99,7 @@ workflows:
   build_and_deploy:
     jobs:
       - build
-      - deploy-to-aws-s3
+      - deploy-to-aws-s3:
           requires:
             - build
           filters:
@@ -108,7 +108,7 @@ workflows:
                 - main
                 - staging
                 - develop
-      - deploy-to-aws-s3
+      - deploy-to-aws-s3:
           requires:
             - deploy-to-aws-s3
           filters:
