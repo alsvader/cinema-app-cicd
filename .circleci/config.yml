@@ -45,3 +45,8 @@ jobs:
             cd build
             zip ../build.zip -r * .[^.]*
             echo "Build successfull"
+
+workflows:
+  jobs:
+    - build
+    - deploy_to_aws-s3
