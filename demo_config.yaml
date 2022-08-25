@@ -1,0 +1,33 @@
+# The config file will alway start with the version of CircleCI you wisth to use
+version: 2.1
+
+# Your configuration needs a job to run, and an execution environment for that job to run in.
+# The following are CircleCI's supported execution environments:
+# Docker
+# Linux VM (Virtual Machine)
+# macOS
+# Windows
+# GPU
+# Arm
+jobs:
+  # Job one with unique name
+  say_hello:
+    docker:
+      # Primary container image where all steps run
+      - image: cimg/base:2022.05
+    steps:
+      - run: echo "Say hello to YAML!"
+  # Job two with a unique name
+  say_goodbye:
+    docker:
+      - image: cimg/base:2022.05
+    steps:
+      - run: echo "Say goodbye to YAML!"
+
+workflows:
+  # Name of workflow
+  hello_and_goodbye:
+    # List of jobs that will run
+    jobs:
+      - say_hello
+      - say_goodbye
