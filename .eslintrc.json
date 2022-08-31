@@ -3,7 +3,11 @@
 		"browser": true,
 		"es2021": true
 	},
-	"extends": ["plugin:react/recommended", "standard"],
+	"extends": [
+		"plugin:react/recommended",
+		"plugin:react/jsx-runtime",
+		"standard"
+	],
 	"globals": {
 		"Atomics": "readonly",
 		"SharedArrayBuffer": "readonly"
@@ -18,7 +22,7 @@
 	},
 	"settings": {
 		"react": {
-			"version": "18.2.0"
+			"version": "detect"
 		}
 	},
 	"plugins": ["react"],
@@ -33,7 +37,6 @@
 		"no-return-assign": 0,
 		"no-tabs": "off",
 		"indent": "off",
-		"react/jsx-uses-react": "off",
-		"react/react-in-jsx-scope": "off"
+		"comma-dangle": ["error", "only-multiline"]
 	}
 }
