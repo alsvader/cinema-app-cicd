@@ -226,7 +226,7 @@ workflows:
             - deploy-to-aws-cloudfront
           filters:
             branches:
-              onlye:
+              only:
                 - main
                 - staging
                 - develop
