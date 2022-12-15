@@ -151,7 +151,7 @@ jobs:
     executor: app-executor
     steps:
       - checkout
-      - attatch_workspace:
+      - attach_workspace:
           at: ./
       - show-current-branch-name
       - install-aws-cli
