@@ -32,7 +32,9 @@ commands:
     steps:
       - run:
           name: Install dependencies
-          command: yarn install
+          command: |
+            mkdir -p artifacts
+            yarn install
   save-app-cache:
     steps:
       - save_cache:
@@ -70,7 +72,8 @@ jobs:
       - save-app-cache
       - run:
           name: Copy Infrastructure Folder
-          command: cp -r infrastructure artifacts/infrastructure
+          command: |
+            cp -r infrastructure artifacts/infrastructure
       - persist_to_workspace:
           root: ./
           paths:
@@ -144,7 +147,7 @@ jobs:
           name: Deploy to AWS S3
           command: |
             AWS_BUCKER_NAME=$(cat artifacts/cinemapp_bucket_name.txt | sed 's/\"//g')
-            echo AWS_BUCKER_NAME
+            echo $AWS_BUCKER_NAME
             if [ "${CIRCLE_BRANCH}" == "main" ]
             then
               aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKER_NAME} --delete
@@ -167,7 +170,7 @@ jobs:
           name: Deploy to AWS CloudFront
           command: |
             AWS_DISTRIBUTION_ID=$(cat artifacts/cinemapp_cloudfront_distribution_id.txt | sed 's/\"//g')
-            echo AWS_DISTRIBUTION_ID
+            echo $AWS_DISTRIBUTION_ID
             aws configure set preview.cloudfront true
             if [ "${CIRCLE_BRANCH}" == "main" ]
             then
@@ -244,7 +247,7 @@ jobs:
       - run:
           name: Terraform Destroy
           command: |
-            cd artifacts/infrastructure/
+            cd infrastructure/
             terraform init
             terraform workspace select ${CIRCLE_BRANCH} || terraform workspace new ${CIRCLE_BRANCH}
             terraform destroy --auto-approve
