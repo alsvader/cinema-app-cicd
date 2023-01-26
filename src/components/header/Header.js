@@ -39,14 +39,20 @@ const Header = () => {
           </div>
           <div
             id="header-mobile-menu"
-            className={`${menuClass ? 'header-menu-toggle is-active' : 'header-menu-toggle'}`}
+            className={`${
+              menuClass ? 'header-menu-toggle is-active' : 'header-menu-toggle'
+            }`}
             onClick={() => toggleMenu()}
           >
             <span className="bar"></span>
             <span className="bar"></span>
             <span className="bar"></span>
           </div>
-          <ul className={`${navClass ? 'header-nav header-mobile-nav' : 'header-nav'}`}>
+          <ul
+            className={`${
+              navClass ? 'header-nav header-mobile-nav' : 'header-nav'
+            }`}
+          >
             {HEADER_LIST.map((item) => (
               <li key={item.id} className="header-nav-item">
                 <span className="header-list-name">
@@ -56,7 +62,11 @@ const Header = () => {
                 <span className="header-list-name">{item.name}</span>
               </li>
             ))}
-            <input className="search-input" type="text" placeholder="Search for a movie" />
+            <input
+              className="search-input"
+              type="text"
+              placeholder="Search for a movie"
+            />
           </ul>
         </div>
       </div>
