@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './MainContent.scss';
 import SlideShow from '../slide-show/SlideShow';
 import Paginate from '../paginate/Paginate';
+import Grid from '../grid/Grid';
 
 const MainContent = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -9,15 +10,35 @@ const MainContent = () => {
   const images = [
     {
       url: 'https://images.pexels.com/photos/436413/pexels-photo-436413.jpeg?auto=compress&cs=tinysrgb&w=500',
+      rating: 7.5,
     },
     {
       url: 'https://images.pexels.com/photos/3417667/pexels-photo-3417667.jpeg?auto=compress&cs=tinysrgb&w=500',
+      rating: 8.5,
     },
     {
       url: 'https://images.pexels.com/photos/3137890/pexels-photo-3137890.jpeg?auto=compress&cs=tinysrgb&w=500',
+      rating: 7.8,
     },
     {
       url: 'https://images.pexels.com/photos/410734/pexels-photo-410734.jpeg?auto=compress&cs=tinysrgb&w=500',
+      rating: 9.7,
+    },
+    {
+      url: 'https://images.pexels.com/photos/436413/pexels-photo-436413.jpeg?auto=compress&cs=tinysrgb&w=500',
+      rating: 6.5,
+    },
+    {
+      url: 'https://images.pexels.com/photos/3417667/pexels-photo-3417667.jpeg?auto=compress&cs=tinysrgb&w=500',
+      rating: 8.5,
+    },
+    {
+      url: 'https://images.pexels.com/photos/3137890/pexels-photo-3137890.jpeg?auto=compress&cs=tinysrgb&w=500',
+      rating: 5.5,
+    },
+    {
+      url: 'https://images.pexels.com/photos/410734/pexels-photo-410734.jpeg?auto=compress&cs=tinysrgb&w=500',
+      rating: 9,
     },
   ];
 
@@ -44,6 +65,7 @@ const MainContent = () => {
         </div>
       </div>
       {/* Display grid component */}
+      <Grid images={images} />
     </div>
   );
 };
