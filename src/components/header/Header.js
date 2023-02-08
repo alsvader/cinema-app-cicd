@@ -5,6 +5,8 @@ import {
   getMovies,
   setMovieType,
   setResponsePageNumber,
+  searchQuery,
+  searchResult,
 } from '../../redux/actions/movies';
 import logo from '../../assets/cinema-logo.svg';
 import './Header.scss';
@@ -27,10 +29,13 @@ const Header = ({
   setResponsePageNumber,
   page,
   totalPages,
+  searchQuery,
+  searchResult,
 }) => {
   const [navClass, setNavClass] = useState(false);
   const [menuClass, setMenuClass] = useState(false);
   const [type, setType] = useState('now_playing');
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     getMovies(type, page);
@@ -51,6 +56,12 @@ const Header = ({
   const setMovieTypeUrl = (type) => {
     setType(type);
     setMovieType(type);
+  };
+
+  const onSearchChange = (e) => {
+    setSearch(e.target.value);
+    searchQuery(e.target.value);
+    searchResult(e.target.value);
   };
 
   return (
@@ -98,6 +109,8 @@ const Header = ({
               className="search-input"
               type="text"
               placeholder="Search for a movie"
+              value={search}
+              onChange={onSearchChange}
             />
           </ul>
         </div>
@@ -112,6 +125,8 @@ Header.propTypes = {
   setResponsePageNumber: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
+  searchQuery: PropTypes.func.isRequired,
+  searchResult: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -123,4 +138,6 @@ export default connect(mapStateToProps, {
   getMovies,
   setMovieType,
   setResponsePageNumber,
+  searchQuery,
+  searchResult,
 })(Header);
