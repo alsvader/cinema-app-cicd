@@ -58,10 +58,15 @@ const Header = ({
     setMovieType(type);
   };
 
-  const onSearchChange = (e) => {
-    setSearch(e.target.value);
-    searchQuery(e.target.value);
-    searchResult(e.target.value);
+  let filterTimeout;
+
+  const onSearchChange = (query) => {
+    clearTimeout(filterTimeout);
+
+    filterTimeout = setTimeout(() => {
+      searchQuery(query);
+      searchResult(query);
+    }, 500);
   };
 
   return (
@@ -109,8 +114,8 @@ const Header = ({
               className="search-input"
               type="text"
               placeholder="Search for a movie"
-              value={search}
-              onChange={onSearchChange}
+              // value={search}
+              onChange={(event) => onSearchChange(event.target.value)}
             />
           </ul>
         </div>
